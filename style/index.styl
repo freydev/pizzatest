@@ -3,73 +3,173 @@ $baseFontSize = 14;
 rem(pixel)
     pixel / $baseFontSize rem
 
+for w in range(5, 100, 5)
+  .w{w}
+    width: rem(w)    
+
 html
     font-size: $baseFontSize px;
 
 body
+    min-width: 320px;
     margin 0;
     padding 0;
+    font-weight 300
     font-family: Roboto;
 
-.rate_table   
-    margin: rem(24);
-    height: auto;
-    font-weight: 300;
-    overflow: hidden;
-    width: 1333px;
+.table 
+  margin rem(48)
+
+  &__row
+    display: table;
+    padding rem(4) 0
+
+    &-title
+      font-weight: 500
+      margin-bottom rem(8)
+
+    &-left, &-right
+      display: table-cell;
+
+    &-left
+      padding-right: rem(24)
+      width rem(315);
+      
+    &:hover 
+      background #f0f1ec;  
+
+  @media screen and (max-width: 360px)
+    margin rem(16)   
+
+.columns
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  &--first
+    padding-bottom: rem(4)
+    border-bottom: 1px solid #e8e8e8;
+
+  &__element
+    display: table-cell;
+    
+    &--place
+        padding-left: rem(24)
+        box-sizing: border-box
+    
+    &--graph
+        text-align: right;
+        padding-right rem(8);
+        box-sizing: border-box;
         
-    &__col
-        display: inline-block;
-        font-weight 400;
-        border-bottom: 2px solid #e8e8e8;
+
+.link
+    color: #2a7fdd;
+    text-decoration: none;
+    border-bottom: 1px solid alpha(#2a7fdd, .2);
+    
+    &:hover
+        color: #e97901;
+        
+    &:visited
+        color: #6f57e6;    
+
+.icon
+    height: 0;
+    width: 0;
+    border-style: solid;
+    margin-left: rem(4)
+    display inline-block;
+    
+    &--up-arrow
+        border-width: 0 4px 8px 4px;
+        border-color: transparent transparent #46681b transparent;
+
+    &--down-arrow
+        border-width: 8px 4px 0 4px;
+        border-color: #a03e33 transparent transparent transparent;    
+
+.graphic
+    width: rem(4)
+    height: 1rem;
+    display inline-block;
+    vertical-align: bottom;
+    position relative
+    top rem(-2)
+    background black;
+    opacity: .2;
+    
+    &__tooltip
+        padding rem(5)
+        background alpha(black, .8);
+        border-radius rem(5)
+        position absolute;
+        color: white;
+        top: -2.5rem;
+        display: none;
+
+    &:hover
+        opacity 1
+        .graphic__tooltip
+            display block;
+    
+    &--last
+        opacity 1
+        
+    &--critical
+        background #a03e33;
+
+.footer
+    margin rem(48)
+    @media screen and (max-width: 360px)
+        margin rem(16)   
+
+    &__left, &__right
+        display inline-block;
+        vertical-align top;
+        
+    &__right
+        float right
+        @media screen and (max-width: 620px)
+            float none
+
+.h-color--red
+    color: #a03e33
+    
+.h-color--green
+    color: #46681b
  
-        &-place
-            float: left;
-            width: rem(60);
-            
-        &-title
-            float: left;
-            width: rem(195);
-            
-        &-rate
-            float: right;
-            width: rem(60);      
-                       
-        &-quality
-            float: left;
-            width: rem(77);
-            
-        &-service
-            float: left;
-            width: rem(58);
-          
-        &-cleaning
-            float: left;
-            width: 6em;
+.h-medal--gold    
+    position: relative;
 
-        &-graph
-            float: left;
-            width: rem(60);
-            
-        &-last_rate
-            float: left;
-            width: 6em;
-            
-        &-problems
-            float: left;
-                     
-    &__delim
-        overflow hidden;
-        height 1.11rem;
-        border-bottom 2px solid #e8e8e8;
-
-    &__title
-        font-weight 500;
-
-    &__median
-        float: left;
-        width 22.5em;
-        margin-right: 1em;
+    &:before
+        content: '';
+        width 1rem;
+        height: 1rem;
+        position: absolute;
+        left: rem(-20);
+        background: gold
+        border-radius: 50px;
         
-    &__last       
-        width: auto;
+.h-medal--silver
+    position: relative;
+     
+    &:before
+        content: '';
+        width 1rem;
+        height: 1rem;
+        position: absolute;
+        left: rem(-20);
+        background: silver
+        border-radius: 50px;
+          
+.h-medal--bronze
+    position: relative;
+    
+    &:before
+        content: '';
+        width 1rem;
+        height: 1rem;
+        position: absolute;
+        left: rem(-20);
+        background: #eca839;
+        border-radius: 50px;

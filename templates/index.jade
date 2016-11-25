@@ -10,20 +10,75 @@ html
     link(href='index.css', rel='stylesheet')
 
   body
-    .rate_table
-      .rate_table__median.rate_table__median--first
-        .rate_table__title В среднем за 12 недель        
-        .rate_table__col.rate_table__col-place Место
-        .rate_table__col.rate_table__col-title Пиццерия
-        .rate_table__col.rate_table__col-rate Рейтинг
-        .rate_table__delim
+    .table
+      .table__row.table__row
+        .table__row-left
+          .table__row-title В среднем за 12 недель
+          .columns.columns--first
+            .columns__element.w60 Место
+            .columns__element Пиццерия
+            .columns__element.w60 Рейтинг
 
-      .rate_table__last.rate_table__median--first
-        .rate_table__title На прошлой неделе, 11-17 июля
-        .rate_table__col.rate_table__col-quality Качество,
-        .rate_table__col.rate_table__col-service сервис,
-        .rate_table__col.rate_table__col-cleaning чистота        
-        .rate_table__col.rate_table__col-graph 12 нед.        
-        .rate_table__col.rate_table__col-last_rate рейтинг        
-        .rate_table__col.rate_table__col-problems Проблемы       
-        .rate_table__delim
+        .table__row-right(data-hide-rate="6")
+          .table__row-title На прошлой неделе, 11-17 июля
+          .columns.columns--first
+            .columns__element.collapse--tablet.w70(data-hide-rate="3") Качество,
+            .columns__element.collapse--tablet.w55(data-hide-rate="2") сервис,
+            .columns__element.collapse--tablet.w65(data-hide-rate="1") чистота
+            .columns__element.w55(data-hide-rate="4") 12 нед.
+            .columns__element.w100(data-hide-rate="5") Рейтинг
+            .columns__element Проблемы
+
+      - var i = 1;
+      each restaurant in json.titles
+        .table__row.table__row
+          .table__row-left
+            .columns.columns
+              .columns__element.columns__element--place.w60
+                - var medals = ['', 'h-medal--gold', 'h-medal--silver', 'h-medal--bronze']
+                - var showPlace = random(0, 10) < 6;
+                if showPlace
+                  if i < 4 
+                    span(class=medals[i]) #{i++}
+                  else   
+                    | #{i++}  
+              .columns__element #[a.link(href="##{i}") #{restaurant}]
+              .columns__element.w60 #{random(70, 99, 1)}
+
+          .table__row-right(data-hide-rate="6")
+            .columns.columns
+              .columns__element.collapse--tablet.w70.h-color--red(data-hide-rate="3") #{random(35, 55)}
+              .columns__element.collapse--tablet.w55.h-color--red(data-hide-rate="2") #{random(35, 55)}
+              .columns__element.collapse--tablet.w65.h-color--red(data-hide-rate="1") #{random(15, 25)}
+              .columns__element.columns__element--graph.w55(data-hide-rate="4")
+                - var graphics = range(random(9, 10));
+                each index in graphics
+                  -
+                    var critical = random(0, 10) < 3;
+                    var class_list = critical ? 'graphic--critical' : '';
+                    var rate = random(70, 100);
+                    if (index == graphics.length) class_list += ' graphic--last';
+                  .graphic(class=class_list, style="height: #{1 / 100 * rate}rem")
+                    .graphic__tooltip=rate
+              .columns__element.w100(data-hide-rate="5")
+                span(class=(random(0, 10) < 2 ? 'h-color--red' : ''))= random(70, 99, 1)
+                - var rate_change = random(1,2,3);
+                if rate_change == 1 
+                  | #[i.icon.icon--up-arrow] #[span.h-color--green #{random(1, 10, 1)}]
+                else if rate_change == 2
+                  | #[i.icon.icon--down-arrow] #[span.h-color--red #{random(1, 10, 1)}]
+              - var problems_count = random(0, 3)
+              .columns__element.js-problem
+                each index in range(problems_count)
+                  - var problem = json.problems[random(0, json.problems.length - 1)];
+                  span=(index > 1 ? problem.toLowerCase() : problem).trim()               
+                  if index < problems_count
+                    span ,&nbsp;
+        if i == 22 && showPlace
+          br
+    .footer
+      .footer__left        
+        a.link(href="#google") Таблица результатов в гугль-доке
+      .footer__right  
+        span.h-abs--right Для замечаний и предложений: #[a.link.link--nohover(href="#mail") support@dodopizza.com ]
+    script(src="script.js")
