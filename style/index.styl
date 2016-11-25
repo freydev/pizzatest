@@ -1,0 +1,75 @@
+$baseFontSize = 14;
+
+rem(pixel)
+    pixel / $baseFontSize rem
+
+html
+    font-size: $baseFontSize px;
+
+body
+    margin 0;
+    padding 0;
+    font-family: Roboto;
+
+.rate_table   
+    margin: rem(24);
+    height: auto;
+    font-weight: 300;
+    overflow: hidden;
+    width: 1333px;
+        
+    &__col
+        display: inline-block;
+        font-weight 400;
+        border-bottom: 2px solid #e8e8e8;
+ 
+        &-place
+            float: left;
+            width: rem(60);
+            
+        &-title
+            float: left;
+            width: rem(195);
+            
+        &-rate
+            float: right;
+            width: rem(60);      
+                       
+        &-quality
+            float: left;
+            width: rem(77);
+            
+        &-service
+            float: left;
+            width: rem(58);
+          
+        &-cleaning
+            float: left;
+            width: 6em;
+
+        &-graph
+            float: left;
+            width: rem(60);
+            
+        &-last_rate
+            float: left;
+            width: 6em;
+            
+        &-problems
+            float: left;
+                     
+    &__delim
+        overflow hidden;
+        height 1.11rem;
+        border-bottom 2px solid #e8e8e8;
+
+    &__title
+        font-weight 500;
+
+    &__median
+        float: left;
+        width 22.5em;
+        margin-right: 1em;
+        
+    &__last       
+        width: auto;
