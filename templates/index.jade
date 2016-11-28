@@ -25,8 +25,8 @@ html
             .columns__element.collapse--tablet.w70(data-hide-rate="3") Качество,
             .columns__element.collapse--tablet.w55(data-hide-rate="2") сервис,
             .columns__element.collapse--tablet.w65(data-hide-rate="1") чистота
-            .columns__element.w55(data-hide-rate="4") 12 нед.
-            .columns__element.w100(data-hide-rate="5") Рейтинг
+            .columns__element.w55(data-hide-rate="5") 12 нед.
+            .columns__element.w100(data-hide-rate="4") Рейтинг
             .columns__element Проблемы
 
       - var i = 1;
@@ -38,19 +38,24 @@ html
                 - var medals = ['', 'h-medal--gold', 'h-medal--silver', 'h-medal--bronze']
                 - var showPlace = random(0, 10) < 6;
                 if showPlace
-                  if i < 4 
+                  if i < 4
                     span(class=medals[i]) #{i++}
-                  else   
-                    | #{i++}  
+                  else
+                    | #{i++}
               .columns__element #[a.link(href="##{i}") #{restaurant}]
-              .columns__element.w60 #{random(70, 99, 1)}
+              - var rate = random(5, 99, 1)
+              .columns__element.w60
+                span.even= rate.toString().split('.')[0]
+                if rate.toString().split('.')[1]
+                  span.deli ,
+                  span.odd= rate.toString().split('.')[1]
 
           .table__row-right(data-hide-rate="6")
             .columns.columns
               .columns__element.collapse--tablet.w70.h-color--red(data-hide-rate="3") #{random(35, 55)}
               .columns__element.collapse--tablet.w55.h-color--red(data-hide-rate="2") #{random(35, 55)}
               .columns__element.collapse--tablet.w65.h-color--red(data-hide-rate="1") #{random(15, 25)}
-              .columns__element.columns__element--graph.w55(data-hide-rate="4")
+              .columns__element.columns__element--graph.w55(data-hide-rate="5")
                 - var graphics = range(random(9, 10));
                 each index in graphics
                   -
@@ -60,25 +65,25 @@ html
                     if (index == graphics.length) class_list += ' graphic--last';
                   .graphic(class=class_list, style="height: #{1 / 100 * rate}rem")
                     .graphic__tooltip=rate
-              .columns__element.w100(data-hide-rate="5")
-                span(class=(random(0, 10) < 2 ? 'h-color--red' : ''))= random(70, 99, 1)
+              .columns__element.w100(data-hide-rate="4")
+                span(class=(random(0, 10) < 2 ? 'h-color--red' : ''))= random(70, 99, 1).replace('.', ',')
                 - var rate_change = random(1,2,3);
-                if rate_change == 1 
-                  | #[i.icon.icon--up-arrow] #[span.h-color--green #{random(1, 10, 1)}]
+                if rate_change == 1
+                  | #[i.icon.icon--up-arrow] #[span.h-color--green #{random(1, 10, 1).replace('.', ',')}]
                 else if rate_change == 2
-                  | #[i.icon.icon--down-arrow] #[span.h-color--red #{random(1, 10, 1)}]
+                  | #[i.icon.icon--down-arrow] #[span.h-color--red #{random(1, 10, 1).replace('.', ',')}]
               - var problems_count = random(0, 3)
               .columns__element.js-problem
                 each index in range(problems_count)
                   - var problem = json.problems[random(0, json.problems.length - 1)];
-                  span=(index > 1 ? problem.toLowerCase() : problem).trim()               
+                  span=(index > 1 ? problem.toLowerCase() : problem).trim()
                   if index < problems_count
                     span ,&nbsp;
         if i == 22 && showPlace
           br
     .footer
-      .footer__left        
+      .footer__left
         a.link.link--noborder(href="#google") Таблица результатов в гугль-доке
-      .footer__right  
+      .footer__right
         span.h-abs--right Для замечаний и предложений: #[a.link.link--noborder.link--nohover(href="#mail") support@dodopizza.com ]
     script(src="script.js")

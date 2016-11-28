@@ -5,7 +5,7 @@ rem(pixel)
 
 for w in range(5, 100, 5)
   .w{w}
-    width: rem(w)    
+    width: rem(w)
 
 html
     font-size: $baseFontSize px;
@@ -17,7 +17,7 @@ body
     font-weight 300
     font-family: Roboto;
 
-.table 
+.table
   margin rem(48)
 
   &__row
@@ -34,12 +34,16 @@ body
     &-left
       padding-right: rem(24)
       width rem(315);
-      
-    &:hover 
-      background #f0f1ec;  
+
+    &:hover
+      background #f0f1ec;
+
+    &:first-child
+      &:hover
+        background: initial
 
   @media screen and (max-width: 360px)
-    margin rem(16)   
+    margin rem(16)
 
 .columns
   width: 100%;
@@ -51,32 +55,32 @@ body
 
   &__element
     display: table-cell;
-    
+
     &--place
         padding-left: rem(24)
         box-sizing: border-box
-    
+
     &--graph
         text-align: right;
         padding-right rem(8);
         box-sizing: border-box;
-        
+
 
 .link
     color: #2a7fdd;
     text-decoration: none;
     border-bottom: 1px solid alpha(#2a7fdd, .2);
-    
+
     &:hover
         color: #e97901;
-        
+
     &:visited
-        color: #6f57e6;    
-        
+        color: #6f57e6;
+
     &--noborder
-        border: none;    
+        border: none;
     &--nohover
-        color: #2a7fdd !important    
+        color: #2a7fdd !important
 
 .icon
     height: 0;
@@ -84,14 +88,14 @@ body
     border-style: solid;
     margin-left: rem(4)
     display inline-block;
-    
+
     &--up-arrow
         border-width: 0 4px 8px 4px;
         border-color: transparent transparent #46681b transparent;
 
     &--down-arrow
         border-width: 8px 4px 0 4px;
-        border-color: #a03e33 transparent transparent transparent;    
+        border-color: #a03e33 transparent transparent transparent;
 
 .graphic
     width: rem(4)
@@ -102,7 +106,7 @@ body
     top rem(-2)
     background black;
     opacity: .2;
-    
+
     &__tooltip
         padding rem(5)
         background alpha(black, .8);
@@ -116,34 +120,39 @@ body
         opacity 1
         .graphic__tooltip
             display block;
-    
+
     &--last
         opacity 1
-        
+
     &--critical
         background #a03e33;
 
 .footer
     margin rem(48)
     @media screen and (max-width: 360px)
-        margin rem(16)   
+        margin rem(16)
 
     &__left, &__right
         display inline-block;
         vertical-align top;
-        
+
     &__right
         float right
         @media screen and (max-width: 620px)
             float none
 
+.even
+  display: inline-block;
+  width: 1.1rem;
+  text-align: right;
+
 .h-color--red
     color: #a03e33
-    
+
 .h-color--green
     color: #46681b
- 
-.h-medal--gold    
+
+.h-medal--gold
     position: relative;
 
     &:before
@@ -154,10 +163,10 @@ body
         left: rem(-20);
         background: gold
         border-radius: 50px;
-        
+
 .h-medal--silver
     position: relative;
-     
+
     &:before
         content: '';
         width 1rem;
@@ -166,10 +175,10 @@ body
         left: rem(-20);
         background: silver
         border-radius: 50px;
-          
+
 .h-medal--bronze
     position: relative;
-    
+
     &:before
         content: '';
         width 1rem;

@@ -15,7 +15,7 @@ function getRandomInt(min, max, float) {
     let digit = getRandomInt(1, 2);
     let round = getRandomInt(0, 10) < 5;
 
-    return round ? random : randomFloat.toFixed(digit)
+    return round ? random.toString() : randomFloat.toFixed(digit)
   }
 
   if (!float) return random
@@ -24,7 +24,7 @@ function getRandomInt(min, max, float) {
 function range(max) {
     return Array(max).fill().map((_, i) => i + 1);
 }
- 
+
 
 gulp.task('connect', () => {
     connect.server({
@@ -68,7 +68,7 @@ gulp.task('html', () => {
         .pipe(connect.reload())
 })
 
-gulp.task('watch', () => {    
+gulp.task('watch', () => {
     gulp.watch(['./templates/**/*.jade'], ['html']);
     gulp.watch(['./style/**/*.styl'], ['style']);
     gulp.watch(['./scripts/**/*.babel.js'], ['scripts']);
